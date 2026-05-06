@@ -5,6 +5,7 @@ __global__ void cuda_hello(){
 }
 
 int main() {
+    printf("CPU code\n");
     cuda_hello<<<1,1>>>(); 
     return 0;
 }
