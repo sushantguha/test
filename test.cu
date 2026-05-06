@@ -7,6 +7,6 @@ __global__ void cuda_hello() {
 int main() {
     printf("CPU code\n");
     cuda_hello << <2, 2 >> > ();
-    cudaDeviceSynchronize();  // ← Wait for GPU to finish
+    cudaDeviceSynchronize(); 
     return 0;
 }
