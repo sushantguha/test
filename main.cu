@@ -18,7 +18,9 @@ __global__ void initArrays(int n, float *a, float *b) {
         a[idx] = (float) idx;
         b[idx] = (float) idx * 2.0f;
     }
-    printf("Thread index: %d | Block Index: %d | Overall index: %d\n", threadIdx.x, blockIdx.x, idx);
+
+    // Takes too long to print, so commenting out.
+    // printf("Thread index: %d | Block Index: %d | Overall index: %d\n", threadIdx.x, blockIdx.x, idx);
 }
 
 int main() {
