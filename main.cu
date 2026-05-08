@@ -35,3 +35,5 @@ int main() {
     printf("Total Memory: %.0f MB\n", prop.totalGlobalMem / 1024.0 / 1024.0);
     return 0;
 }
+
+// git add . && git commit -m "from PC" && git push -u origin main
