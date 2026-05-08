@@ -30,21 +30,31 @@ int main() {
     cudaMallocManaged(&b, n * sizeof(float));
     cudaMallocManaged(&c, n * sizeof(float));
 
-
+    int threads_per_block = 256;
+    int numBlocks = (n + threads_per_block - 1) / threads_per_block;
 
     // Launch the kernel on the GPU.
     // Syntax: <<<number_of_blocks, threads_per_block>>>
-    initArrays<<<1, 5>>>(n, a, b);
+    initArrays<<<numBlocks, threads_per_block>>>(n, a, b);
 
     cudaDeviceSynchronize();
 
     printf("Initialized arrays\n");
     
-    add<<<1, 5>>>(n, a, b, c);
+    add<<<numBlocks, threads_per_block>>>(n, a, b, c);
 
     // Wait for the GPU to finish before the CPU continues.
     // Without this, the program might exit before the GPU prints anything.
     cudaDeviceSynchronize();
+
+    for (int i = 0; i < n; i++) {
+        if (c[i] != a[i] + b[i]) {
+            printf("Error at index %d: %f + %f = %f (expected %f)\n", i, a[i], b[i], c[i], a[i] + b[i]);
+            return 1;
+        }
+    }
+
+    printf("All elements matched!\n");
 
     return 0;
 }
