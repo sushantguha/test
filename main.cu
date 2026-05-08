@@ -18,6 +18,7 @@ __global__ void initArrays(int n, float *a, float *b) {
         a[idx] = (float) idx;
         b[idx] = (float) idx * 2.0f;
     }
+    printf("Thread index: %d | Block Index: %d | Overall index: %d\n", threadIdx.x, blockIdx.x, idx);
 }
 
 int main() {
@@ -61,3 +62,10 @@ int main() {
 
 
 // git add . && git commit -m "from PC" && git push -u origin main
+
+/* 
+Output from Colab: 
+Hello World from CPU!
+Initialized arrays
+All elements matched!
+*/
